@@ -26,13 +26,18 @@ public class ScreenManager {
             ob.onActionReceive(command);
         else {
             DebugUtil.getInstance().chooseDebugType(DebugUtil.DEBUG_TYPE.LOG)
-                    .printDebugMessage(this, "sendActionTo with key is null");
+                    .printDebugMessage(this, "sendActionTo fail, not found observer with class "
+                            + classDestination.getName());
         }
     }
 
     public void register(Class classObserver, ScreenObserver observer) {
-        if (observer == null)
+        if (observer == null) {
+            DebugUtil.getInstance().chooseDebugType(DebugUtil.DEBUG_TYPE.LOG)
+                    .printDebugMessage(this, "register "
+                            + classObserver.getSimpleName() + " is not instance of ScreenObserver. Skip !");
             return;
+        }
 
         if (!lstScreenObserver.containsKey(classObserver))
             lstScreenObserver.put(classObserver, observer);
@@ -43,6 +48,8 @@ public class ScreenManager {
     }
 
     public void unRegister(Class classObserver) {
+        DebugUtil.getInstance().chooseDebugType(DebugUtil.DEBUG_TYPE.LOG)
+                .printDebugMessage(this, "unRegister class" + classObserver.getSimpleName());
         lstScreenObserver.remove(classObserver);
     }
 }

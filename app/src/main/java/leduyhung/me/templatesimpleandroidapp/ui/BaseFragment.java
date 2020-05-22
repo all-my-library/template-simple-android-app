@@ -26,7 +26,7 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        ScreenManager.getInstance().register(getClassListener(), getScreenObserver());
+        ScreenManager.getInstance().register(this.getClass(), (this instanceof ScreenObserver) ? (ScreenObserver) this : null);
     }
 
     @Nullable
@@ -38,10 +38,8 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
-        ScreenManager.getInstance().unRegister(getClassListener());
+        ScreenManager.getInstance().unRegister(this.getClass());
     }
 
     protected abstract int onCreateLayout();
-    protected abstract ScreenObserver getScreenObserver();
-    protected abstract Class getClassListener();
 }

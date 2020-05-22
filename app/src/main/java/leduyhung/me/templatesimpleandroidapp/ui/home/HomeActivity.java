@@ -29,14 +29,4 @@ public class HomeActivity extends BaseActivity implements ScreenObserver {
             default:
         }
     }
-
-    @Override
-    protected ScreenObserver getScreenObserver() {
-        return this;
-    }
-
-    @Override
-    protected Class getClassListener() {
-        return this.getClass();
-    }
 }

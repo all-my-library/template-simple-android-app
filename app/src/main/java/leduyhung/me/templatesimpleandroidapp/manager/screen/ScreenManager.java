@@ -3,6 +3,7 @@ package leduyhung.me.templatesimpleandroidapp.manager.screen;
 import java.util.HashMap;
 
 import leduyhung.me.templatesimpleandroidapp.manager.screen.command.ScreenCommand;
+import leduyhung.me.templatesimpleandroidapp.utils.debug.DebugUtil;
 
 public class ScreenManager {
 
@@ -24,11 +25,15 @@ public class ScreenManager {
         if (ob != null)
             ob.onActionReceive(command);
         else {
-            // TODO: Log the key contain null value
+            DebugUtil.getInstance().chooseDebugType(DebugUtil.DEBUG_TYPE.LOG)
+                    .printDebugMessage(this, "sendActionTo with key is null");
         }
     }
 
     public void register(Class classObserver, ScreenObserver observer) {
+        if (observer == null)
+            return;
+
         if (!lstScreenObserver.containsKey(classObserver))
             lstScreenObserver.put(classObserver, observer);
         else {

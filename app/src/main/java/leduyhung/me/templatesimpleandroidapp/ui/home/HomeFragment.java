@@ -13,16 +13,6 @@ public class HomeFragment extends BaseFragment implements ScreenObserver {
     }
 
     @Override
-    protected ScreenObserver getScreenObserver() {
-        return this;
-    }
-
-    @Override
-    protected Class getClassListener() {
-        return this.getClass();
-    }
-
-    @Override
     public void onActionReceive(ScreenCommand command) {
         String action = command.getAction();
         switch (action) {

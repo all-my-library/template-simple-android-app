@@ -10,15 +10,12 @@ public abstract class BaseActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        ScreenManager.getInstance().register(getClassListener(), getScreenObserver());
+        ScreenManager.getInstance().register(this.getClass(), (this instanceof ScreenObserver) ? (ScreenObserver) this : null);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        ScreenManager.getInstance().unRegister(getClassListener());
+        ScreenManager.getInstance().unRegister(this.getClass());
     }
-
-    protected abstract ScreenObserver getScreenObserver();
-    protected abstract Class getClassListener();
 }
